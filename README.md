@@ -14,7 +14,7 @@ use hanwenbo\ttlock;
 $ttlock = new TTLock($clientId,$clientSecret);
 // oauth2
 $ttlock->oauth2->token($username,$password,$redirect_uri);
-$ttlock->oauth2->refreshToken($refresh_token,$redirect_uri);
+$ttlock->oauth2->refreshToken($token,$redirect_uri);
 
 // date is  Current time (in millisecond)
 $ttlock->user->register($username,$password,$date);

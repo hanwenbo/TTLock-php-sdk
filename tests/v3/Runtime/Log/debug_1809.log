@@ -1,0 +1,2 @@
+18-09-01 15:39:00:Exception at file[/Volumes/dev/www/ezswoole/tests/v2/EasySwooleEvent.php] line[26] message:[Class 'ezswoole\Init' not found]
+18-09-01 15:39:00:Error at file[/Volumes/dev/www/ezswoole/tests/v2/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php] line[67] message:[swoole_http_server::start(): require onMessage callback]

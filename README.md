@@ -3,7 +3,7 @@ php sdk for TTLock
 
 ## Install
 ```bash
-composer require ttlock
+composer require hanwenbo/ttlock
 ```
 
 ## 使用
@@ -40,5 +40,8 @@ $ttlock->lock->updateElectricQuantity($lockId,$electricQuantity,$date);
 $ttlock->lock->transfer($receiverUsername,$lockIdList,$date);
 
 // 其他接口本次开发没用上 后续有需要再完善
+
     
 ```
+## TODO
+- Result Model

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92e313d1995dc36f44d1b8211c32dcdb",
+    "content-hash": "4edd7f5c091b441f03db0d9a8ae946ad",
     "packages": [
         {
             "name": "dragonmantank/cron-expression",
@@ -170,6 +170,58 @@
                 "swoole"
             ],
             "time": "2018-08-31T08:59:45+00:00"
+        },
+        {
+            "name": "hanwenbo/ezswoole",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hanwenbo/ezswoole.git",
+                "reference": "731b1d6bed731dd31aed6b470e075515570689a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hanwenbo/ezswoole/zipball/731b1d6bed731dd31aed6b470e075515570689a9",
+                "reference": "731b1d6bed731dd31aed6b470e075515570689a9",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "easyswoole/easyswoole": "v2.1.1",
+                "easyswoole/wsdebug": "^1",
+                "php": ">=7.2",
+                "phpfastcache/phpfastcache": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ezswoole\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "韩文博",
+                    "email": "9476400@qq.com"
+                }
+            ],
+            "description": "ezswoole",
+            "keywords": [
+                "async",
+                "easyswoole",
+                "ezswoole",
+                "framework",
+                "swoole"
+            ],
+            "time": "2018-09-01T15:49:38+00:00"
         },
         {
             "name": "jeremeamia/SuperClosure",

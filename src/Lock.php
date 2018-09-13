@@ -12,124 +12,368 @@
  */
 
 namespace ttlock;
-
-
-class Lock
+class Lock extends TTLockAbstract
 {
-	/**
-	 * @var string
-	 */
-	private $clientId = '';
-	/**
-	 * @var string
-	 */
-	private $clientSecret = '';
+
 	/**
 	 * @var string
 	 */
 	private $accessToken = '';
 
-	public function __construct( string $clientId, string $clientSecret, string $accessToken )
+	public function setAccessToken( string $accessToken ) : void
 	{
-		$this->clientId     = $clientId;
-		$this->clientSecret = $clientSecret;
-		$this->accessToken  = $accessToken;
+		$this->accessToken = $accessToken;
 	}
 
-	public function initialize() : array
+	/**
+	 * @param string $lockData
+	 * @param string $lockAlias
+	 * @param int    $date
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
+	public function initialize( string $lockData, string $lockAlias, int $date ) : array
 	{
-		return [
-			'lockId' => 121212,
-			'keyId'  => 121212,
-		];
+		$response = $this->client->request( 'POST', '/v3/lock/initialize', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockData'    => $lockData,
+				'lockAlias'   => $lockAlias,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
+
 	}
 
+	/**
+	 * @param int $pageNo
+	 * @param int $pageSize
+	 * @param int $date
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function list( int $pageNo, int $pageSize, int $date ) : array
 	{
-		return [
-			"list" => [
-				[
-					"lockId"             => 123156,
-					"date"               => 1235545850000,
-					"lockName"           => "M201-d9223",
-					"lockAlias"          => "Outdoor lock",
-					"lockMac"            => "52:A6:D8:B2:C1:00",
-					"electricQuantity"   => 100,
-					"keyboardPwdVersion" => 1,
-					"specialValue"       => 1288,
-				],
+		$response = $this->client->request( 'POST', '/v3/lock/list', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'pageNo'      => $pageNo,
+				'pageSize'    => $pageSize,
+				'date'        => $date,
 			],
-		];
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int $lockId
+	 * @param int $pageNo
+	 * @param int $pageSize
+	 * @param int $date
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function listKey( int $lockId, int $pageNo, int $pageSize, int $date ) : array
 	{
-		return [
-			"list" => [
-				[
-					"keyId"     => 21703,
-					"lockId"    => 3215,
-					"openid"    => 1234567890,
-					"username"  => "1234567890",
-					"keyStatus" => "110402",
-					"startDate" => 0,
-					"endDate"   => 0,
-					"remarks"   => "this is for you ",
-					"date"      => 1449816232000,
-				],
+		$response = $this->client->request( 'POST', '/v3/lock/listKey', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'pageNo'      => $pageNo,
+				'pageSize'    => $pageSize,
+				'date'        => $date,
 			],
-		];
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+
+	/**
+	 * @param string $lockId
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function deleteAllKey( string $lockId, int $date ) : bool
 	{
-		return true;
+		$response = $this->client->request( 'POST', '/v3/lock/deleteAllKey', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int $lockId
+	 * @param int $pageNo
+	 * @param int $pageSize
+	 * @param int $date
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function listKeyboardPwd( int $lockId, int $pageNo, int $pageSize, int $date ) : array
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/listKeyboardPwd', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'pageNo'      => $pageNo,
+				'pageSize'    => $pageSize,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int    $lockId
+	 * @param string $password
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function changeAdminKeyboardPwd( int $lockId, string $password, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/changeAdminKeyboardPwd', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'password'    => $password,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int    $lockId
+	 * @param string $password
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function changeDeletePwd( int $lockId, string $password, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/changeDeletePwd', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'password'    => $password,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int    $lockId
+	 * @param string $lockAlias
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function rename( int $lockId, string $lockAlias, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/rename', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'lockAlias'   => $lockAlias,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int $lockId
+	 * @param     $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function resetKey( int $lockId, $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/resetKey', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int    $lockId
+	 * @param string $pwdInfo
+	 * @param int    $timestamp
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function resetKeyboardPwd( int $lockId, string $pwdInfo, int $timestamp, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/resetKeyboardPwd', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'pwdInfo'     => $pwdInfo,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int $lockId
+	 * @param int $date
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function getKeyboardPwdVersion( int $lockId, int $date ) : array
 	{
-		return [
-			'keyboardPwdVersion' => 1,
-		];
+		$response = $this->client->request( 'POST', '/v3/lock/getKeyboardPwdVersion', [
+			'json' => [
+				'clientId'    => $this->clientId,
+				'accessToken' => $this->accessToken,
+				'lockId'      => $lockId,
+				'date'        => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int $lockId
+	 * @param int $electricQuantity
+	 * @param int $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function updateElectricQuantity( int $lockId, int $electricQuantity, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/updateElectricQuantity', [
+			'json' => [
+				'clientId'         => $this->clientId,
+				'accessToken'      => $this->accessToken,
+				'lockId'           => $lockId,
+				'electricQuantity' => $electricQuantity,
+				'date'             => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param string $receiverUsername
+	 * @param string $lockIdList
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function transfer( string $receiverUsername, string $lockIdList, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/lock/transfer', [
+			'json' => [
+				'clientId'         => $this->clientId,
+				'accessToken'      => $this->accessToken,
+				'receiverUsername' => $receiverUsername,
+				'lockIdList'       => $lockIdList,
+				'date'             => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 }

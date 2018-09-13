@@ -14,60 +14,119 @@
 namespace ttlock;
 
 
-class User
+class User extends TTLockAbstract
 {
 	/**
-	 * @var string
-	 */
-	private $clientId = '';
-	/**
-	 * @var string
-	 */
-	private $clientSecret = '';
-
-	public function __construct( string $clientId, string $clientSecret )
-	{
-		$this->clientId     = $clientId;
-		$this->clientSecret = $clientSecret;
-	}
-
-	/**
-	 * @method GET
 	 * @param string $username
 	 * @param string $password
+	 * @param int    $date
 	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
 	 * @author 韩文博
 	 */
-	public function register( string $username, string $password ) : array
+	public function register( string $username, string $password, int $date ) : array
 	{
-		return [
-			'username' => 'xxxx',
-		];
+		$response = $this->client->request( 'POST', '/v3/user/register', [
+			'json' => [
+				'clientId'     => $this->clientId,
+				'clientSecret' => $this->clientSecret,
+				'username'     => $username,
+				'password'     => $password,
+				'date'         => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return [
+				'username' => $body['username'],
+			];
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
+
 	}
 
+	/**
+	 * @param string $username
+	 * @param string $password
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException  | \Exception
+	 * @author 韩文博
+	 */
 	public function resetPassword( string $username, string $password, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/user/resetPassword', [
+			'json' => [
+				'clientId'     => $this->clientId,
+				'clientSecret' => $this->clientSecret,
+				'username'     => $username,
+				'password'     => $password,
+				'date'         => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 
+	/**
+	 * @param int $startDate
+	 * @param int $endDate
+	 * @param int $pageNo
+	 * @param int $pageSize
+	 * @param int $date
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function list( int $startDate, int $endDate, int $pageNo, int $pageSize, int $date ) : array
 	{
-		return [
-			'pageNo'   => 0,
-			'pageSize' => 0,
-			'pages'    => 0,
-			'total'    => 0,
-			'list'     => [
-				[
-					'userid'  => '',
-					'regtime' => '',
-				],
+		$response = $this->client->request( 'POST', '/v3/user/list', [
+			'json' => [
+				'clientId'     => $this->clientId,
+				'clientSecret' => $this->clientSecret,
+				'startDate'    => $startDate,
+				'endDate'      => $endDate,
+				'pageNo'       => $pageNo,
+				'pageSize'     => $pageSize,
+				'date'         => $date,
 			],
-		];
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
+
 	}
 
+	/**
+	 * @param string $username
+	 * @param int    $date
+	 * @return bool
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
 	public function delete( string $username, int $date ) : bool
 	{
-
+		$response = $this->client->request( 'POST', '/v3/user/delete', [
+			'json' => [
+				'clientId'     => $this->clientId,
+				'clientSecret' => $this->clientSecret,
+				'username'     => $username,
+				'date'         => $date,
+			],
+		] );
+		$body     = $response->getBody();
+		if( $body['errcode'] === 0 ){
+			return true;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
 	}
 }

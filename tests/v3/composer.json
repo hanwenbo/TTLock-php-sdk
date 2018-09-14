@@ -19,7 +19,8 @@
     "php": "^7.2",
     "phpFastCache/phpFastCache": "^6.0",
     "hanwenbo/ezswoole": "^2.0",
-    "easyswoole/wsdebug": "^1"
+    "easyswoole/wsdebug": "^1",
+    "guzzlehttp/guzzle": "^6.2"
   },
   "autoload": {
     "psr-4": {

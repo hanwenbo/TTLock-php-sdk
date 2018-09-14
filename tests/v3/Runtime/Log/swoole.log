@@ -1,0 +1,32 @@
+[2018-09-13 22:43:51 *64729.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Cannot declare class App\HttpController\Admin\Oauth2, because the name is already in use in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php on line 7.
+[2018-09-13 22:43:51 $64713.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0
+[2018-09-13 22:43:52 *64722.0]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Cannot declare class App\HttpController\Admin\Oauth2, because the name is already in use in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php on line 7.
+[2018-09-13 22:43:52 $64713.0]	WARNING	swManager_check_exit_status: worker#0 abnormal exit, status=255, signal=0
+[2018-09-13 22:44:13 *64910.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught ezswoole\exception\ErrorException: Class 'GuzzleHttp\Client' not found in /Volumes/dev/www/TTLock-php-sdk/src/TTLock.php:42
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole
+[2018-09-13 22:44:13 $64894.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0
+[2018-09-13 22:44:48 *65009.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught ezswoole\exception\ErrorException: Class 'GuzzleHttp\Client' not found in /Volumes/dev/www/TTLock-php-sdk/src/TTLock.php:42
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole
+[2018-09-13 22:44:48 $64993.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0
+[2018-09-13 22:49:58 *65874.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught ezswoole\exception\ErrorException: syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or function (T_FUNCTION) or const (T_CONST) or \\ (T_NS_SEPARATOR) in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php:7
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(ParseError), Object(EasySwoole\Co
+[2018-09-13 22:49:58 $65858.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0
+[2018-09-13 22:50:03 *65876.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught ezswoole\exception\ErrorException: syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or function (T_FUNCTION) or const (T_CONST) or \\ (T_NS_SEPARATOR) in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php:7
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(ParseError), Object(EasySwoole\Co
+[2018-09-13 22:50:03 $65858.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0
+[2018-09-13 22:53:42 *66611.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught ezswoole\exception\ErrorException: Class 'App\Utils\Code' not found in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Api.php:50
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::
+[2018-09-13 22:53:42 $66594.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0
+[2018-09-13 22:56:30 *67075.7]	ERROR	zm_deactivate_swoole (ERROR 503): Fatal error: Uncaught ezswoole\exception\ErrorException: Class 'App\Utils\Code' not found in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Api.php:50
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::
+[2018-09-13 22:56:30 $67059.0]	WARNING	swManager_check_exit_status: worker#7 abnormal exit, status=255, signal=0

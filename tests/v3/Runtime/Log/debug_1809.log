@@ -1,2 +1,54 @@
 18-09-01 15:39:00:Exception at file[/Volumes/dev/www/ezswoole/tests/v2/EasySwooleEvent.php] line[26] message:[Class 'ezswoole\Init' not found]
 18-09-01 15:39:00:Error at file[/Volumes/dev/www/ezswoole/tests/v2/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php] line[67] message:[swoole_http_server::start(): require onMessage callback]
+18-09-13 22:43:51:Error at file[/Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php] line[7] message:[Cannot declare class App\HttpController\Admin\Oauth2, because the name is already in use]
+18-09-13 22:43:52:Error at file[/Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php] line[7] message:[Cannot declare class App\HttpController\Admin\Oauth2, because the name is already in use]
+18-09-13 22:44:13:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/TTLock.php] line[42] message:[Uncaught ezswoole\exception\ErrorException: Class 'GuzzleHttp\Client' not found in /Volumes/dev/www/TTLock-php-sdk/src/TTLock.php:42
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_response))
+#2 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Component/Invoker.php(61): call_user_func_array(Object(Closure), Array)
+#3 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php(137): EasySwoole\Core\Component\Invoker::callUserFuncArray(Object(Closure), Array)
+#4 [internal function]: EasySwoole\Core\Swoole\ServerManager->EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_res]
+18-09-13 22:44:48:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/TTLock.php] line[42] message:[Uncaught ezswoole\exception\ErrorException: Class 'GuzzleHttp\Client' not found in /Volumes/dev/www/TTLock-php-sdk/src/TTLock.php:42
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_response))
+#2 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Component/Invoker.php(61): call_user_func_array(Object(Closure), Array)
+#3 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php(137): EasySwoole\Core\Component\Invoker::callUserFuncArray(Object(Closure), Array)
+#4 [internal function]: EasySwoole\Core\Swoole\ServerManager->EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_res]
+18-09-13 22:49:58:Error at file[/Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php] line[7] message:[Uncaught ezswoole\exception\ErrorException: syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or function (T_FUNCTION) or const (T_CONST) or \\ (T_NS_SEPARATOR) in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php:7
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(ParseError), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_response))
+#2 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Component/Invoker.php(61): call_user_func_array(Object(Closure), Array)
+#3 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php(137): EasySwoole\Core\Component\Invoker::callUserFuncArray(Object(Closure), Array)
+#4 [int]
+18-09-13 22:50:03:Error at file[/Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php] line[7] message:[Uncaught ezswoole\exception\ErrorException: syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or function (T_FUNCTION) or const (T_CONST) or \\ (T_NS_SEPARATOR) in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Oauth2.php:7
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(ParseError), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_response))
+#2 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Component/Invoker.php(61): call_user_func_array(Object(Closure), Array)
+#3 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php(137): EasySwoole\Core\Component\Invoker::callUserFuncArray(Object(Closure), Array)
+#4 [int]
+18-09-13 22:53:42:Error at file[/Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Api.php] line[50] message:[Uncaught ezswoole\exception\ErrorException: Class 'App\Utils\Code' not found in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Api.php:50
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_response))
+#2 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Component/Invoker.php(61): call_user_func_array(Object(Closure), Array)
+#3 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php(137): EasySwoole\Core\Component\Invoker::callUserFuncArray(Object(Closure), Array)
+#4 [internal function]: EasySwoole\Core\Swoole\ServerManager->EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), ]
+18-09-13 22:56:30:Error at file[/Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Api.php] line[50] message:[Uncaught ezswoole\exception\ErrorException: Class 'App\Utils\Code' not found in /Volumes/dev/www/TTLock-php-sdk/tests/v3/App/HttpController/Api/Api.php:50
+Stack trace:
+#0 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/EventHelper.php(52): ezswoole\ExceptionHandler->handle(Object(Error), Object(EasySwoole\Core\Http\Request), Object(EasySwoole\Core\Http\Response))
+#1 [internal function]: EasySwoole\Core\Swoole\EventHelper::EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), Object(swoole_http_response))
+#2 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Component/Invoker.php(61): call_user_func_array(Object(Closure), Array)
+#3 /Volumes/dev/www/TTLock-php-sdk/tests/v3/vendor/easyswoole/easyswoole/src/Core/Swoole/ServerManager.php(137): EasySwoole\Core\Component\Invoker::callUserFuncArray(Object(Closure), Array)
+#4 [internal function]: EasySwoole\Core\Swoole\ServerManager->EasySwoole\Core\Swoole\{closure}(Object(swoole_http_request), ]
+18-09-14 10:02:19:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[40] message:[Undefined index: errcode]
+18-09-14 10:02:19:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[43] message:[Undefined index: errcode]
+18-09-14 10:02:19:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[43] message:[Undefined index: errmsg]
+18-09-14 10:02:19:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[43] message:[Undefined index: errmsg]
+18-09-14 10:03:05:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[40] message:[Undefined index: errcode]
+18-09-14 10:03:05:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[43] message:[Undefined index: errcode]
+18-09-14 10:03:05:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[43] message:[Undefined index: errmsg]
+18-09-14 10:03:05:Error at file[/Volumes/dev/www/TTLock-php-sdk/src/User.php] line[43] message:[Undefined index: errmsg]

@@ -36,7 +36,7 @@ class Lock extends TTLockAbstract
 	public function initialize( string $lockData, string $lockAlias, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/initialize', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockData'    => $lockData,
@@ -44,8 +44,8 @@ class Lock extends TTLockAbstract
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
 			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -64,7 +64,7 @@ class Lock extends TTLockAbstract
 	public function list( int $pageNo, int $pageSize, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/list', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'pageNo'      => $pageNo,
@@ -72,8 +72,8 @@ class Lock extends TTLockAbstract
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
 			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -92,7 +92,7 @@ class Lock extends TTLockAbstract
 	public function listKey( int $lockId, int $pageNo, int $pageSize, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/listKey', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
@@ -101,8 +101,8 @@ class Lock extends TTLockAbstract
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
 			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -120,15 +120,15 @@ class Lock extends TTLockAbstract
 	public function deleteAllKey( string $lockId, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/deleteAllKey', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -147,7 +147,7 @@ class Lock extends TTLockAbstract
 	public function listKeyboardPwd( int $lockId, int $pageNo, int $pageSize, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/listKeyboardPwd', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
@@ -156,8 +156,8 @@ class Lock extends TTLockAbstract
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
 			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -175,16 +175,16 @@ class Lock extends TTLockAbstract
 	public function changeAdminKeyboardPwd( int $lockId, string $password, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/changeAdminKeyboardPwd', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
-				'password'    => $password,
+				'password'    => md5( $password ),
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -202,16 +202,16 @@ class Lock extends TTLockAbstract
 	public function changeDeletePwd( int $lockId, string $password, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/changeDeletePwd', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
-				'password'    => $password,
+				'password'    => md5( $password ),
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -229,7 +229,7 @@ class Lock extends TTLockAbstract
 	public function rename( int $lockId, string $lockAlias, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/rename', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
@@ -237,8 +237,8 @@ class Lock extends TTLockAbstract
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -255,15 +255,15 @@ class Lock extends TTLockAbstract
 	public function resetKey( int $lockId, $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/resetKey', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -282,7 +282,7 @@ class Lock extends TTLockAbstract
 	public function resetKeyboardPwd( int $lockId, string $pwdInfo, int $timestamp, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/resetKeyboardPwd', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
@@ -290,8 +290,8 @@ class Lock extends TTLockAbstract
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -308,15 +308,15 @@ class Lock extends TTLockAbstract
 	public function getKeyboardPwdVersion( int $lockId, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/getKeyboardPwdVersion', [
-			'json' => [
+			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,
 				'lockId'      => $lockId,
 				'date'        => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
 			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -334,7 +334,7 @@ class Lock extends TTLockAbstract
 	public function updateElectricQuantity( int $lockId, int $electricQuantity, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/updateElectricQuantity', [
-			'json' => [
+			'form_params' => [
 				'clientId'         => $this->clientId,
 				'accessToken'      => $this->accessToken,
 				'lockId'           => $lockId,
@@ -342,8 +342,8 @@ class Lock extends TTLockAbstract
 				'date'             => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -361,7 +361,7 @@ class Lock extends TTLockAbstract
 	public function transfer( string $receiverUsername, string $lockIdList, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/lock/transfer', [
-			'json' => [
+			'form_params' => [
 				'clientId'         => $this->clientId,
 				'accessToken'      => $this->accessToken,
 				'receiverUsername' => $receiverUsername,
@@ -369,8 +369,8 @@ class Lock extends TTLockAbstract
 				'date'             => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );

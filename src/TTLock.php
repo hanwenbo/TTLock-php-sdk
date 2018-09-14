@@ -14,8 +14,10 @@
 namespace ttlock;
 
 /**
- * @property User $user
- * @property Lock $lock
+ * @property User   $user
+ * @property Lock   $lock
+ * @property Oauth2 $oauth2
+ * @property Key    $key
  */
 class TTLock
 {
@@ -38,16 +40,18 @@ class TTLock
 	{
 		$this->clientId     = $clientId;
 		$this->clientSecret = $clientSecret;
-		$this->client = new \GuzzleHttp\Client([
-			'base_uri'=>'https://api.ttlock.com.cn'
-		]);
+		$this->client       = new \GuzzleHttp\Client( [
+			'base_uri' => 'https://api.ttlock.com.cn',
+		] );
 	}
 
 	protected $container = [];
 	protected $providers
 		= [
-			"user" => User::class,
-			"lock" => Lock::class,
+			"user"   => User::class,
+			"lock"   => Lock::class,
+			"oauth2" => Oauth2::class,
+			"key"    => Key::class,
 		];
 
 	/**
@@ -63,7 +67,7 @@ class TTLock
 		} else{
 			if( !isset( $this->container[$name] ) || !$this->container[$name] instanceof TTLockAbstract ){
 				try{
-					$this->container["{$name}"] = new $this->providers[$name]( $this->clientId, $this->clientSecret,$this->request );
+					$this->container["{$name}"] = new $this->providers[$name]( $this->clientId, $this->clientSecret, $this->client );
 				} catch( \Exception $e ){
 					throw new $e;
 				}

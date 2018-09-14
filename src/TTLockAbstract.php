@@ -31,10 +31,10 @@ abstract class TTLockAbstract
 	 */
 	protected $client;
 
-	final function __construct( string $clientId, string $clientSecret, \GuzzleHttp\Client $request )
+	final function __construct( string $clientId, string $clientSecret, \GuzzleHttp\Client $client )
 	{
 		$this->clientId     = $clientId;
 		$this->clientSecret = $clientSecret;
-		$this->request      = $request;
+		$this->client       = $client;
 	}
 }

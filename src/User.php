@@ -27,19 +27,17 @@ class User extends TTLockAbstract
 	public function register( string $username, string $password, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/user/register', [
-			'json' => [
+			'form_params' => [
 				'clientId'     => $this->clientId,
 				'clientSecret' => $this->clientSecret,
 				'username'     => $username,
-				'password'     => $password,
+				'password'     => md5($password),
 				'date'         => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
-			return [
-				'username' => $body['username'],
-			];
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
+			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
 		}
@@ -57,16 +55,16 @@ class User extends TTLockAbstract
 	public function resetPassword( string $username, string $password, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/user/resetPassword', [
-			'json' => [
+			'form_params' => [
 				'clientId'     => $this->clientId,
 				'clientSecret' => $this->clientSecret,
 				'username'     => $username,
-				'password'     => $password,
+				'password'     => md5($password),
 				'date'         => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
@@ -86,7 +84,7 @@ class User extends TTLockAbstract
 	public function list( int $startDate, int $endDate, int $pageNo, int $pageSize, int $date ) : array
 	{
 		$response = $this->client->request( 'POST', '/v3/user/list', [
-			'json' => [
+			'form_params' => [
 				'clientId'     => $this->clientId,
 				'clientSecret' => $this->clientSecret,
 				'startDate'    => $startDate,
@@ -96,13 +94,12 @@ class User extends TTLockAbstract
 				'date'         => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
 			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
 		}
-
 	}
 
 	/**
@@ -115,15 +112,15 @@ class User extends TTLockAbstract
 	public function delete( string $username, int $date ) : bool
 	{
 		$response = $this->client->request( 'POST', '/v3/user/delete', [
-			'json' => [
+			'form_params' => [
 				'clientId'     => $this->clientId,
 				'clientSecret' => $this->clientSecret,
 				'username'     => $username,
 				'date'         => $date,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $body['errcode'] === 0 ){
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && isset( $body['errcode'] ) && $body['errcode'] === 0 ){
 			return true;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );

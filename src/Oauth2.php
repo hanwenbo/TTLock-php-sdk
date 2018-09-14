@@ -27,44 +27,44 @@ class Oauth2 extends TTLockAbstract
 	public function token( string $username, string $password, string $redirect_uri )
 	{
 		$response = $this->client->request( 'POST', '/oauth2/token', [
-			'json' => [
+			'form_params' => [
 				'client_id'     => $this->clientId,
 				'client_secret' => $this->clientSecret,
 				'grant_type'    => 'password',
 				'username'      => $username,
-				'password'      => $password,
+				'password'      => md5( $password ),
 				'redirect_uri'  => $redirect_uri,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $response->getStatusCode() === 200 ){
-			return (array)$response->getBody();
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
+			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
 		}
 	}
 
 	/**
-	 * @param string $token
+	 * @param string $refresh_token
 	 * @param string $redirect_uri
 	 * @return array
 	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
 	 * @author 韩文博
 	 */
-	public function refreshToken( string $token, string $redirect_uri )
+	public function refreshToken( string $refresh_token, string $redirect_uri )
 	{
 		$response = $this->client->request( 'POST', '/oauth2/token', [
-			'json' => [
+			'form_params' => [
 				'client_id'     => $this->clientId,
 				'client_secret' => $this->clientSecret,
 				'grant_type'    => 'refresh_token',
-				'refresh_token' => $token,
+				'refresh_token' => $refresh_token,
 				'redirect_uri'  => $redirect_uri,
 			],
 		] );
-		$body     = $response->getBody();
-		if( $response->getStatusCode() === 200 ){
-			return (array)$response->getBody();
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
+			return (array)$body;
 		} else{
 			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
 		}

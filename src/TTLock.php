@@ -75,4 +75,18 @@ class TTLock
 			return $this->container["{$name}"];
 		}
 	}
+	/**
+	 * 根据日期时间返回毫秒时间戳
+	 * @param string$dateTime
+	 * @return int
+	 * @author 韩文博
+	 */
+	static function getDateTimeMillisecond(string $dateTime) : int
+	{
+		$dateTime = $dateTime .".0";
+		list($usec, $sec) = explode(".", $dateTime);
+		$date = strtotime($usec);
+		$return_data = str_pad($date.$sec,13,"0",STR_PAD_RIGHT); //不足13位。右边补0
+		return (int)$return_data;
+	}
 }

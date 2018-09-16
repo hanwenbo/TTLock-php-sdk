@@ -24,7 +24,8 @@ class EasySwooleEvent implements EventInterface
 	public static function mainServerCreate( ServerManager $server, EventRegister $register ) : void
 	{
 		\ezswoole\Init::register();
-
+		// todo 临时写法
+		cache( 'cron_ttlock_register', false );
 		$register->add( 'workerStart', function( \swoole_websocket_server $server, $worker_id ){
 			if( PHP_OS === 'Linux' ){
 				swoole_set_process_name( 'ezswoole' );

@@ -26,6 +26,37 @@ class Key extends TTLockAbstract
 	}
 
 	/**
+	 * @param int    $lockId
+	 * @param string $receiverUsername
+	 * @param int    $startDate
+	 * @param int    $endDate
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException | \Exception
+	 * @author 韩文博
+	 */
+	public function send( int $lockId, string $receiverUsername, int $startDate, int $endDate )
+	{
+		$response = $this->client->request( 'POST', '/v3/key/send', [
+			'form_params' => [
+				'clientId'         => $this->clientId,
+				'accessToken'      => $this->accessToken,
+				'lockId'           => $lockId,
+				'receiverUsername' => $receiverUsername,
+				'startDate'        => $startDate,
+				'endDate'          => $endDate,
+				'date'             => $this->getMillisecond(),
+				'remoteEnable'     => 2,
+			],
+		] );
+		$body     = json_decode( $response->getBody()->getContents(), true );
+		if( $response->getStatusCode() === 200  ){
+			return (array)$body;
+		} else{
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+		}
+	}
+
+	/**
 	 * @method GET
 	 * @param int $lastUpdateDate
 	 * @param int $date

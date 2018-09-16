@@ -36,10 +36,10 @@ class User extends TTLockAbstract
 			],
 		] );
 		$body     = json_decode( $response->getBody()->getContents(), true );
-		if( $response->getStatusCode() === 200 && !isset( $body['errcode'] ) ){
+		if( $response->getStatusCode() === 200 ){
 			return (array)$body;
 		} else{
-			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}" );
+			throw new \Exception( "errcode {$body['errcode']} errmsg {$body['errmsg']} errmsg : {$body['errmsg']}",$body['errcode']);
 		}
 
 	}

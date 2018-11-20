@@ -43,8 +43,8 @@ $ttlock->lock->transfer($receiverUsername,$lockIdList,$date);
 // Passcode
 $ttlock->passcode->get( int $lockId, int $keyboardPwdVersion, int $keyboardPwdType, int $startDate, int $endDate, int $date ) : array
 $ttlock->passcode->delete( int $lockId, int $keyboardPwdId, int $deleteType, int $date ):array
-$ttlock->passcode->change( int $lockId, int $keyboardPwdId, string $newKeyboardPwd, int $startDate, int $endDate, int $changeType, int $date )
-$ttlock->passcode->add( int $lockId, string $keyboardPwd, int $startDate, int $endDate, int $addType, int $date )
+$ttlock->passcode->change( int $lockId, int $keyboardPwdId, string $newKeyboardPwd, int $startDate, int $endDate, int $changeType, int $date ) : array
+$ttlock->passcode->add( int $lockId, string $keyboardPwd, int $startDate, int $endDate, int $addType, int $date ) : array
 
 
 

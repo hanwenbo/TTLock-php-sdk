@@ -70,7 +70,7 @@ class Passcode extends TTLockAbstract
 	 */
 	public function delete( int $lockId, int $keyboardPwdId, int $deleteType, int $date ):array
 	{
-		$response = $this->client->request( 'POST', '/v3/keyboardPwd/get', [
+		$response = $this->client->request( 'POST', '/v3/keyboardPwd/delete', [
 			'form_params' => [
 				'clientId'      => $this->clientId,
 				'accessToken'   => $this->accessToken,
@@ -102,7 +102,7 @@ class Passcode extends TTLockAbstract
 	 */
 	public function change( int $lockId, int $keyboardPwdId, string $newKeyboardPwd, int $startDate, int $endDate, int $changeType, int $date ) : array
 	{
-		$response = $this->client->request( 'POST', '/v3/keyboardPwd/get', [
+		$response = $this->client->request( 'POST', '/v3/keyboardPwd/change', [
 			'form_params' => [
 				'clientId'       => $this->clientId,
 				'accessToken'    => $this->accessToken,
@@ -137,7 +137,7 @@ class Passcode extends TTLockAbstract
 	 */
 	public function add( int $lockId, string $keyboardPwd, int $startDate, int $endDate, int $addType, int $date ) : array
 	{
-		$response = $this->client->request( 'POST', '/v3/keyboardPwd/get', [
+		$response = $this->client->request( 'POST', '/v3/keyboardPwd/add', [
 			'form_params' => [
 				'clientId'    => $this->clientId,
 				'accessToken' => $this->accessToken,

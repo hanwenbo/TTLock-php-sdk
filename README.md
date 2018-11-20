@@ -39,6 +39,15 @@ $ttlock->lock->getKeyboardPwdVersion($lockId,$date);
 $ttlock->lock->updateElectricQuantity($lockId,$electricQuantity,$date);
 $ttlock->lock->transfer($receiverUsername,$lockIdList,$date);
 
+
+// Passcode
+$ttlock->passcode->get( int $lockId, int $keyboardPwdVersion, int $keyboardPwdType, int $startDate, int $endDate, int $date ) : array
+$ttlock->passcode->delete( int $lockId, int $keyboardPwdId, int $deleteType, int $date ):array
+$ttlock->passcode->change( int $lockId, int $keyboardPwdId, string $newKeyboardPwd, int $startDate, int $endDate, int $changeType, int $date )
+$ttlock->passcode->add( int $lockId, string $keyboardPwd, int $startDate, int $endDate, int $addType, int $date )
+
+
+
 // 其他接口本次开发没用上 后续有需要再完善
 
     

@@ -14,10 +14,11 @@
 namespace ttlock;
 
 /**
- * @property User   $user
- * @property Lock   $lock
- * @property Oauth2 $oauth2
- * @property Key    $key
+ * @property User     $user
+ * @property Lock     $lock
+ * @property Oauth2   $oauth2
+ * @property Key      $key
+ * @property Passcode $passcode
  */
 class TTLock
 {

@@ -37,12 +37,12 @@ class TTLock
 	private $client;
 
 
-	public function __construct( string $clientId, string $clientSecret )
+	public function __construct( string $clientId, string $clientSecret, string $base_uri = 'https://api.ttlock.com.cn' )
 	{
 		$this->clientId     = $clientId;
 		$this->clientSecret = $clientSecret;
 		$this->client       = new \GuzzleHttp\Client( [
-			'base_uri' => 'https://api.ttlock.com.cn',
+			'base_uri' => $base_uri,
 		] );
 	}
 
